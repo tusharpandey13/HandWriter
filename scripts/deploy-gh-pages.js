@@ -5,7 +5,7 @@ ghpages.publish(
   'build',
   {
     branch: 'gh-pages',
-    repo: 'git@github.com:tusharpandey13/tusharpandey13.github.io.git',
+    repo: 'git@github.com:tusharpandey13/HandWriter.git',
   },
   () => {
     console.log('Deploy Complete!');
