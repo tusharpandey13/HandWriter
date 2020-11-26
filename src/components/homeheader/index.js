@@ -12,7 +12,7 @@ const HomeHeader = props => {
         </span>
       </div>
       <div className='C-title'>
-        <a href='https://github.com/tusharpandey13/Assignment_Writer' target='_blank' rel='noreferrer'>
+        <a href='https://github.com/tusharpandey13/HandWriter' target='_blank' rel='noreferrer'>
           <button className='btn btn-light text-black'>{ghSvg}</button>
         </a>
       </div>
