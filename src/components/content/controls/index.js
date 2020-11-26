@@ -88,7 +88,7 @@ const Controls = props => {
                   quality: 1,
                   pixelRatio: 2,
                 }),
-                pageCtr.toString()
+                `handwriter-${pageCtr}-${Date.now()}`
               );
             }}
           >
@@ -98,7 +98,7 @@ const Controls = props => {
         </InputContainer>
         <InputContainer title='Controls'>
           <InputGroup name='scale' min={20} max={30} step={0.25} {...props}></InputGroup>
-          <InputGroup name='top' min={-200} max={0} {...props}></InputGroup>
+          <InputGroup name='top' min={-200} max={0} step={0.5} {...props}></InputGroup>
           <InputGroup name='left' min={-200} max={0} {...props}></InputGroup>
           <InputGroup name='linespacing' min={0} max={200} {...props}></InputGroup>
           <InputGroup name='width' min={180} max={540} step={10} {...props}></InputGroup>

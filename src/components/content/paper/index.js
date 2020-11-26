@@ -94,25 +94,26 @@ const Paper = props => {
               }
             }
           }
-
+          let currentchar = hyphenflag === i ? '-' : text[i];
           lastspace = false;
           out[out.length - 1].push({
-            char: hyphenflag === i ? '-' : text[i],
-            x: tmpx + dimMap[text[i]][4],
+            char: currentchar,
+            x: tmpx + dimMap[currentchar][4],
             y: tmpy,
-            width: dimMap[text[i]][0],
-            height: dimMap[text[i]][1],
+            width: dimMap[currentchar][0],
+            height: dimMap[currentchar][1],
             scaleX: scaleX,
-            scaleY: dimMap[text[i]][7],
+            scaleY: dimMap[currentchar][7],
             opacity: rand(0.875, 1),
             rotation: rand(0, tmprotation),
             offsetY:
               -props.store.commonConfig.linespacing +
-              dimMap[text[i]][1] * dimMap[text[i]][7] -
-              dimMap[text[i]][3],
+              dimMap[currentchar][1] * dimMap[currentchar][7] -
+              dimMap[currentchar][3],
           });
           tmpx +=
-            (dimMap[text[i]][0] * props.store.commonConfig.scale * scaleX) / 100 + dimMap[text[i]][5];
+            (dimMap[currentchar][0] * props.store.commonConfig.scale * scaleX) / 100 +
+            dimMap[currentchar][5];
           if (hyphenflag === i) {
             i--;
             hyphenflag = -1;
