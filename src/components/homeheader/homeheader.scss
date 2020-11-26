@@ -1,0 +1,32 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/vars';
+
+nav {
+  @include m.flex(initial, row, nowrap, flex-start, center);
+  width: 100%;
+  padding: 0 1rem !important;
+  height: 3.5rem;
+  .C-title {
+    @include m.user-select(none);
+
+    @include m.flex(100%, row, nowrap, center, center);
+    padding: 1rem;
+    .navbar-brand {
+      @include m.flex(100%, column, nowrap, center, center);
+    }
+
+    svg {
+      // margin: 0 1rem;
+      height: 2rem;
+      color: white;
+    }
+
+    .btn {
+      @include m.BoxShadow(1);
+      svg {
+        height: 1.5rem;
+        color: black;
+      }
+    }
+  }
+}

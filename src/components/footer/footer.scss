@@ -1,0 +1,71 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/vars';
+@use '../../styles/common';
+
+$primary-bg: #031d44;
+$light-bg: #dae5f2;
+
+:root {
+  --gap-horizontal: 7rem;
+}
+
+.contact-C {
+  @include m.flex(initial, row, wrap, space-between, stretch);
+  margin: 0;
+  padding: 2rem calc(var(--gap-horizontal));
+
+  color: $primary-bg;
+  background-color: $light-bg;
+
+  border-top: 1px solid $primary-bg;
+
+  a {
+    color: $primary-bg;
+  }
+
+  .c-sep {
+    display: block;
+    min-width: 20rem;
+    min-height: 1rem;
+  }
+}
+
+.footer {
+  margin: 0;
+  padding: 0.5rem 2rem;
+  color: $light-bg;
+
+  background-color: $primary-bg;
+  font-family: 'Garamond', Georgia, 'Times New Roman', Times, serif;
+  font-size: 0.9rem;
+
+  border-top: 1px solid $primary-bg;
+  // border-bottom: 5px solid $primary-bg;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  start {
+    grid-area: 1 / 1 / 2 / 2;
+    a {
+      color: $light-bg;
+    }
+  }
+  middle {
+    grid-area: 1 / 2 / 2 / 3;
+    text-align: center;
+  }
+  end {
+    grid-area: 1 / 3 / 2 / 4;
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  :root {
+    --gap-horizontal: 2rem;
+  }
+}

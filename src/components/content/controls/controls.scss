@@ -1,0 +1,38 @@
+@use '../../../styles/mixins' as m;
+@use '../../../styles/vars';
+@use '../../../styles/common';
+$dark-bg: #031d44;
+$light-bg: #dae5f2;
+
+.C-controls {
+  // background-color: #f5f5f5;
+  @include m.flex(100%, column, nowrap, flex-start, center);
+  width: 100%;
+
+  .C-inputs {
+    overflow-y: auto;
+    @include m.flex(100%, column, nowrap, flex-start, center);
+    width: 100%;
+    border-left: 1px solid #7e868d;
+
+    .h6 {
+      font-size: 0.8rem;
+    }
+  }
+}
+.buttoncontrol {
+  @include m.flex(initial, row, nowrap, center, center);
+  @include m.BoxShadow(1);
+
+  margin: 0.5rem 0;
+  // width: 100%;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  span {
+    // text-align: center;
+    margin: 0 1rem;
+  }
+}

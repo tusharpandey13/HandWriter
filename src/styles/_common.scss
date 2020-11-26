@@ -1,0 +1,27 @@
+@use './vars';
+@use './mixins' as m;
+
+/* top | right | bottom | left */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Source+Code+Pro&display=swap');
+
+html,
+#root {
+  margin: 0;
+  height: 100vh;
+  min-height: 100%;
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  @include m.user-select(none);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  // background-color: $border-color;
+
+  overflow-y: auto;
+
+  @include m.reveal-opacity-anim(0.5s);
+  // opacity: 0;
+}

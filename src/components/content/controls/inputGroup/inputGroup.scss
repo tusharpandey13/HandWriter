@@ -1,0 +1,31 @@
+@use '../../../../styles/mixins' as m;
+@use '../../../../styles/vars';
+@use '../../../../styles/common';
+.input-C {
+  @include m.flex(initial, row, wrap, space-between, center);
+  width: 100%;
+  padding: 0rem 1rem;
+  // margin: 0.5rem 0rem;
+  .label {
+    // width: 100%;
+    text-transform: uppercase;
+    // margin-right: 1rem;
+    // min-width: 10%;
+    font-size: 0.9rem;
+    color: #444444;
+    @include m.user-select(none);
+  }
+
+  .slider {
+    flex-grow: 1;
+    // max-width: 60%;
+    width: 100%;
+  }
+  span {
+    // min-width: 10%;
+    // margin-left: 1rem;
+    @include m.user-select(none);
+    font-size: 1rem;
+    color: #444444;
+  }
+}

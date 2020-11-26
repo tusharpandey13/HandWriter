@@ -1,0 +1,21 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/vars';
+@use '../../styles/common';
+
+$dark-bg: #031d44;
+$light-bg: #dae5f2;
+
+.C-content {
+  @include m.flex(100%, row, nowrap, space-between, stretch);
+  // background-color: #efefff;
+}
+
+// .link {
+//   color: rgb(30, 143, 255);
+//   text-decoration: underline;
+//   &:hover {
+//     text-decoration: none;
+//     background-color: rgb(30, 143, 255);
+//     color: white;
+//   }
+// }

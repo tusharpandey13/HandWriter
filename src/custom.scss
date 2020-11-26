@@ -1,0 +1,22 @@
+@use './styles/common';
+@use './styles/mixins';
+@use './styles/vars';
+
+// Override default variables before the import
+$spacer: 1rem;
+$spacers: (
+  // The rest of numbers you need to use...
+  half: ($spacer * 0.5),
+  1: ($spacer * 1),
+  2: ($spacer * 2),
+  3: ($spacer * 3),
+  4: ($spacer * 4),
+  5: ($spacer * 5),
+  6: ($spacer * 6)
+);
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+.App {
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+@use '../../../styles/mixins' as m;
+@use '../../../styles/vars';
+@use '../../../styles/common';
+$dark-bg: #031d44;
+$light-bg: #dae5f2;
+.C-paper {
+  @include m.flex(100%, row, nowrap, space-between, stretch);
+  width: 100%;
+  .stage {
+    height: 100%;
+    width: 100%;
+  }
+}

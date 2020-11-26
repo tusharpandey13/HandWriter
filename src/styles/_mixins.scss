@@ -1,0 +1,176 @@
+@use './vars';
+@use 'sass:list';
+@use 'sass:string';
+
+@mixin flex($ht, $dir, $wrap, $justify, $align) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: $dir $wrap;
+  -moz-flex-flow: $dir $wrap;
+  -ms-flex-flow: $dir $wrap;
+  flex-flow: $dir $wrap;
+
+  -webkit-justify-content: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  justify-content: $justify;
+  -ms-flex-pack: $justify;
+
+  -webkit-place-items: $align;
+  -moz-place-items: $align;
+  -ms-place-items: $align;
+  // -ms-flex-align: $align;
+  place-items: $align;
+
+  height: $ht;
+}
+
+// @mixin blur-back($r) {
+//   // -webkit-backface-visibility: hidden;
+//   backface-visibility: hidden;
+//   // -webkit-backdrop-filter: saturate(180%) blur($r);
+//   backdrop-filter: blur($r) brightness(1.65) contrast(0.7) saturate(0.7);
+//   // backdrop-filter: blur($r) invert(0) contrast(20);
+//   // backdrop-filter: saturate(180%) blur($r);
+// }
+
+@mixin BoxShadow($dp) {
+  @if $dp==0 {
+    box-shadow: none;
+  } @else if $dp==1 {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
+      0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  } @else if $dp==2 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
+      0 1px 5px 0 rgba(0, 0, 0, 0.4);
+  } @else if $dp==3 {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12),
+      0 1px 8px 0 rgba(0, 0, 0, 0.4);
+  } @else if $dp==4 {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+      0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  } @else if $dp==6 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+      0 3px 5px -1px rgba(0, 0, 0, 0.4);
+  } @else if $dp==6.5 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
+      0 3px 5px -1px rgba(0, 0, 0, 0.4);
+  } @else if $dp==8 {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
+      0 5px 5px -3px rgba(0, 0, 0, 0.4);
+  } @else if $dp==9 {
+    box-shadow: 0 9px 12px 1px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
+      0 5px 6px -3px rgba(0, 0, 0, 0.4);
+  } @else if $dp==12 {
+    box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12),
+      0 7px 8px -4px rgba(0, 0, 0, 0.4);
+  } @else if $dp==16 {
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),
+      0 8px 10px -5px rgba(0, 0, 0, 0.4);
+  } @else if $dp==24 {
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
+      0 11px 15px -7px rgba(0, 0, 0, 0.4);
+  } @else {
+    @error "Invalid argument for $dp: {" + $dp + "}, look at the method definition for possible values";
+  }
+}
+
+@mixin user-select($arg) {
+  -webkit-touch-callout: $arg; /* iOS Safari */
+  -webkit-user-select: $arg; /* Safari */
+  -khtml-user-select: $arg; /* Konqueror HTML */
+  -moz-user-select: $arg; /* Old versions of Firefox */
+  -ms-user-select: $arg; /* Internet Explorer/Edge */
+  user-select: $arg; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+// @mixin pseudo($top: 0, $right: 0, $bottom: 0, $left: 0) {
+//   content: ' ';
+//   position: absolute;
+//   top: $top;
+//   right: $right;
+//   bottom: $bottom;
+//   left: $left;
+// }
+
+/* @keyframes duration | timing-function | delay | 
+iteration-count | direction | fill-mode | play-state | name */
+
+@mixin anim(
+  $keyframes,
+  $duration,
+  $bezier,
+  $delay,
+  $iteration-count: 1,
+  $direction: normal,
+  $fill-mode: forwards,
+  $play-state: running
+) {
+  @each $prop, $vals in $keyframes {
+    #{$prop}: #{list.nth($vals, 1)};
+  }
+
+  $anim-name: string.unique-id();
+
+  animation: $duration $bezier $delay $iteration-count $direction $fill-mode $play-state $anim-name;
+
+  @keyframes #{$anim-name} {
+    from {
+      @each $prop, $vals in $keyframes {
+        #{$prop}: #{list.nth($vals, 1)};
+      }
+    }
+    to {
+      @each $prop, $vals in $keyframes {
+        #{$prop}: #{list.nth($vals, 2)};
+      }
+    }
+  }
+}
+
+@mixin reveal-opacity-anim($delay, $duration: 2s) {
+  @include anim(
+    (
+      opacity: (
+        0,
+        1,
+      ),
+      pointer-events: (
+        none,
+        unset,
+      ),
+    ),
+    $duration,
+    vars.$reveal-bezier,
+    $delay
+  );
+}
+
+// @mixin reveal-slide-anim($delay, $duration: 1s) {
+//   transform-origin: left;
+//   @include anim(
+//     (
+//       transform: (
+//         scaleX(0),
+//         scaleX(1),
+//       ),
+//       pointer-events: (
+//         none,
+//         unset,
+//       ),
+//     ),
+//     $duration,
+//     $reveal-bezier,
+//     $delay
+//   );
+// }

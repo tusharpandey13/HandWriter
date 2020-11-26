@@ -1,0 +1,28 @@
+@use '../../../../styles/mixins' as m;
+@use '../../../../styles/vars';
+@use '../../../../styles/common';
+$dark-bg: #031d44;
+$light-bg: #dae5f2;
+
+.card {
+  width: 100%;
+  @include m.BoxShadow(9);
+}
+.flexrow {
+  @include m.flex(initial, row, nowrap, space-between, center);
+  // background-color: #37474f !important;
+  .btn {
+    @include m.flex(initial, row, nowrap, space-between, center);
+    span {
+      margin: 0 1rem;
+      font-size: 0.9rem;
+    }
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+}
+.card-body {
+  // background-color: #505861;
+}
