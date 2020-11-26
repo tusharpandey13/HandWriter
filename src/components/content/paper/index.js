@@ -8,6 +8,28 @@ import './paper.scss';
 
 const rand = (min, max) => Math.random() * (max - min) + min;
 
+const CharImg = props => {
+  // console.log(props.e1);
+  // const [image, status] = useImage(props.src);
+  return (
+    <Image
+      // image={props.store.chars[e1.char]}
+      image={props.image}
+      // key={props.i1}
+      x={props.e1.x}
+      y={props.e1.y}
+      offsetY={props.e1.offsetY}
+      scaleX={(props.e1.scaleX * props.store.commonConfig.scale) / 100}
+      scaleY={((props.e1.scaleY ?? 1) * props.store.commonConfig.scale) / 100}
+      opacity={props.e1.opacity * props.store.commonConfig.opacity}
+      rotation={props.e1.rotation}
+      width={props.e1.width}
+      height={props.e1.height}
+      listening={false}
+    />
+  );
+};
+
 const Paper = props => {
   const [stageContainerRef, { height }] = useMeasure();
   const [textData, setTextData] = useState([]);
@@ -24,6 +46,7 @@ const Paper = props => {
       const tmprotation = rand(-10, 10);
       let out = [[]];
       for (let i = 0; i < text.length; i += 1) {
+        if (!(text[i].charCodeAt(0) >= 32 && text[i].charCodeAt(0) < 126)) continue;
         if (text[i] === '\n') {
           out.push([]);
           tmpx = rand(-4, 4);
@@ -39,6 +62,8 @@ const Paper = props => {
           }
           lastspace = true;
         } else {
+          console.log(`outputting : ${text[i]}`);
+
           const scaleX = rand(0.9, 1.3) * dimMap[text[i]][6];
           if (props.store.commonConfig.cols - out[out.length - 1].length < 11) {
             let tmpsum = 0;
@@ -63,7 +88,6 @@ const Paper = props => {
                 break;
               }
             }
-            // console.log(`outputting : ${text[i]}`);
           }
 
           lastspace = false;
@@ -71,6 +95,8 @@ const Paper = props => {
             char: hyphenflag === i ? '-' : text[i],
             x: tmpx + dimMap[text[i]][4],
             y: tmpy,
+            width: dimMap[text[i]][0],
+            height: dimMap[text[i]][1],
             scaleX: scaleX,
             scaleY: dimMap[text[i]][7],
             opacity: rand(0.875, 1),
@@ -110,6 +136,7 @@ const Paper = props => {
         stageRef: stageRef,
       });
     }
+    // console.log(props.store.chars);
   }, [props.store]);
 
   useEffect(() => {
@@ -153,19 +180,9 @@ const Paper = props => {
                 (i0 * props.store.commonConfig.linespacing * props.store.commonConfig.scale) / 100;
               return (
                 <Group y={tmpy} key={i0}>
-                  {e0.map((e1, i1) => (
-                    <Image
-                      image={props.store.chars[e1.char]}
-                      key={i1}
-                      x={e1.x}
-                      y={e1.y}
-                      offsetY={e1.offsetY}
-                      scaleX={(e1.scaleX * props.store.commonConfig.scale) / 100}
-                      scaleY={((e1.scaleY ?? 1) * props.store.commonConfig.scale) / 100}
-                      opacity={e1.opacity * props.store.commonConfig.opacity}
-                      rotation={e1.rotation}
-                    />
-                  ))}
+                  {e0.map((e1, i1) => {
+                    return <CharImg image={props.store.chars[e1.char]} i1={i1} e1={e1} {...props} />;
+                  })}
                 </Group>
               );
             })}

@@ -19,6 +19,7 @@ const dimMap = {
   '%': [48, 70, 0, 0, 5, 10, 1, 1],
   '&': [44, 63, 0, 0, 5, 10, 1, 1],
   "'": [7, 18, 0, -50, 5, 10, 1, 1],
+  '`': [7, 18, 0, -50, 5, 10, 1, 1],
   '(': [18, 66, 0, 0, 5, 10, 1, 1],
   ')': [23, 67, 0, 0, 5, 10, 1, 1],
   '*': [38, 35, 0, -20, 5, 10, 1, 1],
@@ -105,13 +106,11 @@ const initialState = {
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABHNCSVQICAgIfAhkiAAAAAtJREFUCFtj+A8EAAn7A/2fHywAAAAAAElFTkSuQmCC',
   ],
   bgURLindex: 0,
-  chars: range(33, 126).reduce(function (obj, i) {
-    if (i !== 96) {
-      const tmpchar = String.fromCharCode(i);
-      let tmpimg = new Image(dimMap[tmpchar][0], dimMap[tmpchar][1]);
-      tmpimg.src = `font/${i}_t.png`;
-      obj[tmpchar] = tmpimg;
-    }
+  chars: range(33, 126).reduce((obj, i) => {
+    const tmpchar = String.fromCharCode(i);
+    let tmpimg = new Image(dimMap[tmpchar][0], dimMap[tmpchar][1]);
+    tmpimg.src = `${process.env.PUBLIC_URL}/font/${i}_t.png`;
+    obj[tmpchar] = tmpimg;
     return obj;
   }, {}),
   commonConfig: {
