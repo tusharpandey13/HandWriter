@@ -46,7 +46,12 @@ const Paper = props => {
       const tmprotation = rand(-10, 10);
       let out = [[]];
       for (let i = 0; i < text.length; i += 1) {
-        if (!(text[i].charCodeAt(0) >= 32 && text[i].charCodeAt(0) < 126)) continue;
+        if (
+          !`0123456789!"#$%&'()*+,-./:;<=>?@[\]^_{|}ABCDEFGHIJKLMNOPQRSTUVWXYZacemnorsuvwxbdfhijkltgpqyz \n\``.includes(
+            text[i]
+          )
+        )
+          continue;
         if (text[i] === '\n') {
           out.push([]);
           tmpx = rand(-4, 4);
