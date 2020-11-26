@@ -2,7 +2,7 @@
   "name": "newhome",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tusharpandey13.github.io/HandWriter/",
+  "homepage": "https://tusharpandey13.github.io/HandWriter",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
