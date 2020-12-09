@@ -123,6 +123,7 @@ const initialState = {
     cols: 50,
   },
   stageRef: undefined,
+  imageURLS: [],
 };
 
 const reducer = (state, action) => {
@@ -143,6 +144,10 @@ const reducer = (state, action) => {
       return { ...state, commonConfig: action.commonConfig };
     case 'SETSTAGEREF':
       return { ...state, stageRef: action.stageRef };
+    case 'ADDIMAGEURLS':
+      return { ...state, imageURLS: state.imageURLS.concat(action.imageURLS) };
+    case 'RESETIMAGEURLS':
+      return { ...state, imageURLS: initialState.imageURLS };
     default:
       return state;
   }

@@ -1,213 +1,56 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Stage, Layer, Image, Group } from 'react-konva';
-import Konva from 'konva';
+import React, { useRef, useEffect } from 'react';
+import { Stage } from 'react-konva';
 import { useMeasure } from 'react-use';
-import useImage from 'use-image';
-import { initialState, dimMap } from '../store';
+
+import BgLayer from './BgLayer';
+import ImagesLayer from './ImagesLayer';
+import TextLayer from './TextLayer';
 
 import './paper.scss';
 
-const rand = (min, max) => Math.random() * (max - min) + min;
-
-const CharImg = props => {
-  // const [image, status] = useImage(props.src);
-  // const imageRef = useRef();
-  // console.log(`drawing ${props.i1}`);
-  // useEffect(() => {
-  //   if (props.image) {
-  //     // you many need to reapply cache on some props changes like shadow, stroke, etc.
-  //     // imageRef.current.cache();
-  //     // since this update is not handled by "react-konva" and we are using Konva methods directly
-  //     // we have to redraw layer manually
-  //     // imageRef.current.getLayer().batchDraw();
-  //   }
-  // }, [props]);
-  return (
-    <Image
-      // image={props.store.chars[e1.char]}
-      image={props.image}
-      // ref={imageRef}
-      // key={props.i1}
-      x={props.e1.x}
-      y={props.e1.y}
-      offsetY={props.e1.offsetY}
-      scaleX={(props.e1.scaleX * props.store.commonConfig.scale) / 100}
-      scaleY={((props.e1.scaleY ?? 1) * props.store.commonConfig.scale) / 100}
-      opacity={props.e1.opacity * props.store.commonConfig.opacity}
-      rotation={props.e1.rotation}
-      width={props.e1.width}
-      height={props.e1.height}
-      listening={true}
-      // filters={[Konva.Filters.Blur]}
-      // blurRadius={10}
-    />
-  );
-};
-
 const Paper = props => {
   const [stageContainerRef, { height }] = useMeasure();
-  const [textData, setTextData] = useState([]);
-  const textLayerRef = useRef();
-  const bgLayerRef = useRef();
   const stageRef = useRef();
+  const [selectedId, selectShape] = React.useState(null);
+
+  const checkDeselect = e => {
+    // deselect when clicked on empty area
+    // console.log(e.target.attrs.id, e.target.getStage().attrs.id);
+    const clickedOnEmpty = e.target.attrs.id === 'bglayer';
+    if (!clickedOnEmpty) return;
+    selectShape(null);
+  };
 
   useEffect(() => {
-    const textlayout = text => {
-      let lastspace = false;
-      let hyphenflag = -1;
-      let tmpx = rand(-4, 4);
-      let tmpy = rand(-1, 0);
-      const tmprotation = rand(-10, 10);
-      let out = [[]];
-      for (let i = 0; i < text.length; i += 1) {
-        if (
-          !`0123456789!"#$%&'()*+,-./:;<=>?@[\]^_{|}ABCDEFGHIJKLMNOPQRSTUVWXYZacemnorsuvwxbdfhijkltgpqyz \n\``.includes(
-            text[i]
-          )
-        )
-          continue;
-        if (text[i] === '\n') {
-          out.push([]);
-          tmpx = rand(-4, 4);
-        } else if (text[i] === ' ') {
-          tmpx += rand(8, 12);
-          if (
-            hyphenflag === -1 &&
-            tmpx >= props.store.commonConfig.left + props.store.commonConfig.width
-          ) {
-            out.push([]);
-            tmpx = rand(-4, 4);
-            // console.log(text[i - 1], text[i], text[i + 1]);
-          }
-          lastspace = true;
-        } else {
-          // console.log(`outputting : ${text[i]}`);
-
-          const scaleX = rand(0.9, 1.3) * dimMap[text[i]][6];
-          if (props.store.commonConfig.cols - out[out.length - 1].length < 11) {
-            let tmpsum = 0;
-            for (let j = 0; j < 3; j += 1) {
-              tmpsum +=
-                ((dimMap[text[i + j]] ?? [0])[0] * scaleX * props.store.commonConfig.scale) / 100;
-              if (
-                hyphenflag === -1 &&
-                !'\n. '.includes(text[i + j]) &&
-                tmpx + tmpsum >= props.store.commonConfig.left + props.store.commonConfig.width
-              ) {
-                // console.log(`found : ${text[i]}`);
-                hyphenflag = i + j;
-                if (lastspace) {
-                  out.push([]);
-                  i = i + j;
-                  // console.log(`decremented, new ele : ${text[i]}`);
-                  // console.log(out[out.length - 1]);
-                  tmpx = rand(-4, 4);
-                  hyphenflag = -1;
-                }
-                break;
-              }
-            }
-          }
-          let currentchar = hyphenflag === i ? '-' : text[i];
-          lastspace = false;
-          out[out.length - 1].push({
-            char: currentchar,
-            x: tmpx + dimMap[currentchar][4],
-            y: tmpy,
-            width: dimMap[currentchar][0],
-            height: dimMap[currentchar][1],
-            scaleX: scaleX,
-            scaleY: dimMap[currentchar][7],
-            opacity: rand(0.875, 1),
-            rotation: rand(0, tmprotation),
-            offsetY:
-              -props.store.commonConfig.linespacing +
-              dimMap[currentchar][1] * dimMap[currentchar][7] -
-              dimMap[currentchar][3],
-          });
-          tmpx +=
-            (dimMap[currentchar][0] * props.store.commonConfig.scale * scaleX) / 100 +
-            dimMap[currentchar][5];
-          if (hyphenflag === i) {
-            i--;
-            hyphenflag = -1;
-            out.push([]);
-            tmpx = rand(-4, 4);
-          }
-        }
-      }
-      return out;
-    };
-
-    setTextData(textlayout(props.store.text));
-  }, [
-    props.store.text,
-    props.store.commonConfig.scale,
-    props.store.commonConfig.width,
-    props.store.commonConfig.cols,
-  ]);
+    console.log(selectedId);
+  }, [selectedId]);
 
   useEffect(() => {
-    textLayerRef.current.draw();
-    // console.log(stageRef.current);
+    // textLayerRef.current.draw();
     if (!props.store.stageRef) {
       props.dispatch({
         type: 'SETSTAGEREF',
         stageRef: stageRef,
       });
     }
-    // console.log(props.store.chars);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.store]);
-
-  useEffect(() => {
-    bgLayerRef.current.draw();
-  }, [props.bgURLindex]);
 
   return (
     <div className='C-paper'>
       <div className='stage' ref={stageContainerRef}>
-        <Stage height={height} width={0.7 * height} ref={stageRef}>
-          <Layer ref={bgLayerRef}>
-            <Image
-              image={
-                useImage(
-                  //img src here
-                  props.store.bgURLS[props.store.bgURLindex]
-                )[0]
-              }
-              height={height}
-              width={0.7 * height}
-            />
-          </Layer>
-          <Layer
-            imageSmoothingEnabled={true}
-            offsetY={props.store.commonConfig.top}
-            offsetX={props.store.commonConfig.left}
-            ref={textLayerRef}
-            draggable={true}
-            listening={true}
-            onMouseEnter={e => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'all-scroll';
-            }}
-            onMouseLeave={e => {
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-          >
-            {textData.map((e0, i0) => {
-              let tmpy =
-                (i0 * props.store.commonConfig.linespacing * props.store.commonConfig.scale) / 100;
-              return (
-                <Group y={tmpy} key={i0} listening={true} draggable={true}>
-                  {e0.map((e1, i1) => {
-                    return <CharImg image={props.store.chars[e1.char]} i1={i1} e1={e1} {...props} />;
-                  })}
-                </Group>
-              );
-            })}
-          </Layer>
+        <Stage
+          id='stage'
+          height={height}
+          width={0.7 * height}
+          ref={stageRef}
+          listening={true}
+          onMouseDown={checkDeselect}
+          onTouchStart={checkDeselect}
+        >
+          <BgLayer {...props} height={height} />
+          <ImagesLayer {...props} selectedId={selectedId} selectShape={selectShape} />
+          <TextLayer {...props} selectedId={selectedId} selectShape={selectShape} />
         </Stage>
       </div>
     </div>

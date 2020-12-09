@@ -4,7 +4,7 @@ import { Collapse } from 'react-bootstrap';
 import InputGroup from './inputGroup';
 import InputContainer from './inputContainer';
 import './controls.scss';
-import { uploadSvg, randomSvg, downloadSvg, trashSvg } from './svgs';
+import { uploadSvg, randomSvg, downloadSvg, trashSvg, clearSvg } from './svgs';
 
 const downloadURI = (uri, name) => {
   const link = document.createElement('a');
@@ -43,6 +43,19 @@ const Controls = props => {
     });
   };
 
+  const dispatchResetPage = e => {
+    props.dispatch({
+      type: 'RESETBGURLINDEX',
+    });
+    props.dispatch({
+      type: 'CHANGETEXT',
+      text: '',
+    });
+    props.dispatch({
+      type: 'RESETIMAGEURLS',
+    });
+  };
+
   const fileRef = useRef();
 
   return (
@@ -50,6 +63,10 @@ const Controls = props => {
       <HomeHeader title={`HandWriter`} thickborder={``} header />
       <div className='C-inputs bg-white pl-1 pr-1'>
         <InputContainer title='Paper' open={true}>
+          <button className='btn btn-light buttoncontrol col' onClick={dispatchResetPage}>
+            <span>Clear Page</span>
+            {clearSvg}
+          </button>
           <input type='file' accept='image/*' onChange={dispatchImageChange} ref={fileRef} hidden />
           <button
             className='btn btn-dark buttoncontrol col'
