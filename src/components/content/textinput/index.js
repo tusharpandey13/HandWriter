@@ -18,7 +18,7 @@ const TextInput = props => {
   return (
     <div className='C-textinput'>
       <textarea
-        placeholder='Enter Text You want to be written on a paper....'
+        placeholder='Enter Text You want to be written on paper. Paste an image here to add to paper.'
         // id='dataField'
         // onKeyUp='textChanged(this.value)'
         cols='50'

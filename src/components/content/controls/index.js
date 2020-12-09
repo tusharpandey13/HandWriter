@@ -120,7 +120,7 @@ const Controls = props => {
           <InputGroup name='linespacing' min={0} max={200} {...props}></InputGroup>
           <InputGroup name='width' min={180} max={540} step={10} {...props}></InputGroup>
           <div className='alert alert-light mb-0 h6' role='alert'>
-            Tip: Drag the text to reposition
+            Tip: Drag the content to reposition, paste images into the editor to add
           </div>
         </InputContainer>
       </div>
