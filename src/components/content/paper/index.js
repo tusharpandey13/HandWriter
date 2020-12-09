@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Stage, Layer, Image, Group } from 'react-konva';
+import Konva from 'konva';
 import { useMeasure } from 'react-use';
 import useImage from 'use-image';
 import { initialState, dimMap } from '../store';
@@ -9,12 +10,23 @@ import './paper.scss';
 const rand = (min, max) => Math.random() * (max - min) + min;
 
 const CharImg = props => {
-  // console.log(props.e1);
   // const [image, status] = useImage(props.src);
+  // const imageRef = useRef();
+  // console.log(`drawing ${props.i1}`);
+  // useEffect(() => {
+  //   if (props.image) {
+  //     // you many need to reapply cache on some props changes like shadow, stroke, etc.
+  //     // imageRef.current.cache();
+  //     // since this update is not handled by "react-konva" and we are using Konva methods directly
+  //     // we have to redraw layer manually
+  //     // imageRef.current.getLayer().batchDraw();
+  //   }
+  // }, [props]);
   return (
     <Image
       // image={props.store.chars[e1.char]}
       image={props.image}
+      // ref={imageRef}
       // key={props.i1}
       x={props.e1.x}
       y={props.e1.y}
@@ -25,7 +37,9 @@ const CharImg = props => {
       rotation={props.e1.rotation}
       width={props.e1.width}
       height={props.e1.height}
-      listening={false}
+      listening={true}
+      // filters={[Konva.Filters.Blur]}
+      // blurRadius={10}
     />
   );
 };
@@ -67,7 +81,7 @@ const Paper = props => {
           }
           lastspace = true;
         } else {
-          console.log(`outputting : ${text[i]}`);
+          // console.log(`outputting : ${text[i]}`);
 
           const scaleX = rand(0.9, 1.3) * dimMap[text[i]][6];
           if (props.store.commonConfig.cols - out[out.length - 1].length < 11) {
@@ -171,6 +185,7 @@ const Paper = props => {
             offsetX={props.store.commonConfig.left}
             ref={textLayerRef}
             draggable={true}
+            listening={true}
             onMouseEnter={e => {
               // style stage container:
               const container = e.target.getStage().container();
@@ -185,7 +200,7 @@ const Paper = props => {
               let tmpy =
                 (i0 * props.store.commonConfig.linespacing * props.store.commonConfig.scale) / 100;
               return (
-                <Group y={tmpy} key={i0}>
+                <Group y={tmpy} key={i0} listening={true} draggable={true}>
                   {e0.map((e1, i1) => {
                     return <CharImg image={props.store.chars[e1.char]} i1={i1} e1={e1} {...props} />;
                   })}
