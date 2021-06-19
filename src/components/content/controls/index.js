@@ -114,11 +114,11 @@ const Controls = props => {
           </button>
         </InputContainer>
         <InputContainer title='Controls'>
-          <InputGroup name='scale' min={20} max={30} step={0.25} {...props}></InputGroup>
+          <InputGroup name='scale' min={15} max={30} step={0.25} {...props}></InputGroup>
           <InputGroup name='top' min={-200} max={0} step={0.5} {...props}></InputGroup>
           <InputGroup name='left' min={-200} max={0} {...props}></InputGroup>
           <InputGroup name='linespacing' min={0} max={200} {...props}></InputGroup>
-          <InputGroup name='width' min={180} max={540} step={10} {...props}></InputGroup>
+          <InputGroup name='width' min={180} max={600} step={10} {...props}></InputGroup>
           <div className='alert alert-light mb-0 h6' role='alert'>
             Tip: Drag the content to reposition, paste images into the editor to add
           </div>
