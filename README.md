@@ -4,6 +4,8 @@ Deployed at [https://tusharpandey13.github.io/HandWriter/](https://tusharpandey1
 
 > Easily convert digital text into handwriting
 
+![screenshot](https://github.com/tusharpandey13/HandWriter/raw/master/Screenshot_20210619_221104.png)
+
 Using this tool, you can convert digital text to an image that looks as if it was written by hand.
 
 Made in React and using KonvaJS to render letter bitmaps and page on HTML canvas.
