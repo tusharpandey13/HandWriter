@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/HandWriter/static/css/main.806e3ce7.chunk.css",
-    "main.js": "/HandWriter/static/js/main.a41f0ef5.chunk.js",
-    "main.js.map": "/HandWriter/static/js/main.a41f0ef5.chunk.js.map",
+    "main.css": "/HandWriter/static/css/main.5c0d44a0.chunk.css",
+    "main.js": "/HandWriter/static/js/main.9131f0e4.chunk.js",
+    "main.js.map": "/HandWriter/static/js/main.9131f0e4.chunk.js.map",
     "runtime-main.js": "/HandWriter/static/js/runtime-main.576e6d97.js",
     "runtime-main.js.map": "/HandWriter/static/js/runtime-main.576e6d97.js.map",
     "static/js/2.5efe9651.chunk.js": "/HandWriter/static/js/2.5efe9651.chunk.js",
     "static/js/2.5efe9651.chunk.js.map": "/HandWriter/static/js/2.5efe9651.chunk.js.map",
     "index.html": "/HandWriter/index.html",
-    "static/css/main.806e3ce7.chunk.css.map": "/HandWriter/static/css/main.806e3ce7.chunk.css.map",
+    "static/css/main.5c0d44a0.chunk.css.map": "/HandWriter/static/css/main.5c0d44a0.chunk.css.map",
     "static/js/2.5efe9651.chunk.js.LICENSE.txt": "/HandWriter/static/js/2.5efe9651.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.576e6d97.js",
     "static/js/2.5efe9651.chunk.js",
-    "static/css/main.806e3ce7.chunk.css",
-    "static/js/main.a41f0ef5.chunk.js"
+    "static/css/main.5c0d44a0.chunk.css",
+    "static/js/main.9131f0e4.chunk.js"
   ]
 }
