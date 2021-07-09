@@ -47,6 +47,7 @@ const Paper = props => {
           listening={true}
           onMouseDown={checkDeselect}
           onTouchStart={checkDeselect}
+          rotation={props.store.commonConfig.rotation}
         >
           <BgLayer {...props} height={height} />
           <ImagesLayer {...props} selectedId={selectedId} selectShape={selectShape} />

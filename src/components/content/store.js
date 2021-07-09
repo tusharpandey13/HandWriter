@@ -121,6 +121,7 @@ const initialState = {
     opacity: 0.82,
     width: 480,
     cols: 50,
+    rotation: 0.0,
   },
   stageRef: undefined,
   imageURLS: [],
